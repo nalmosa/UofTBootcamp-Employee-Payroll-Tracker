@@ -2,7 +2,9 @@
 const addEmployeesBtn = document.querySelector('#add-employees-btn');
 
 // Declare the variables firstName, lastName, salary, and employeeData
-let firstName, lastName, salary, employeeData;
+let firstName, lastName, salary, singleEmployee;
+let employeesArray = [];
+let allSalary = [];
 
 const collectEmployees = function() {
   // Open input window to ask for questions
@@ -11,7 +13,13 @@ const collectEmployees = function() {
   salary = window.prompt("What is your salary?");
 
   // Store input into an array
-  let employeeData = [firstName, lastName, salary];
+  let singleEmployee = [firstName, lastName, salary];
+
+  // Puts all employees into an array
+  employeesArray.push(singleEmployee);
+
+  // Since we need calulcate salary later, log salary into an array
+  allSalary.push(salary);
 
   // Ask if the user wants to continue
   const addAnother = window.confirm("Add another employee?")
@@ -20,24 +28,46 @@ const collectEmployees = function() {
     collectEmployees();
   }
 
-  return employeeData;
+  return employeesArray;
 }
 
 // Call the function to collect employee data
 collectEmployees();
 
 // Log all employee data
-console.log(employeeData);
+console.log(employeesArray);
 
-// Display the average salary
+console.log(allSalary);
+
+// TODO: Calculate and display the average salary
 const displayAverageSalary = function(employeesArray) {
-  // TODO: Calculate and display the average salary
 }
+
+// Sum of salaries
+const salarySum = allSalary.reduce((total, salary) => total + salary, 0);
+console.log(salarySum)
+
+// Average salary (sum div. amount of salaries inputted)
+const salaryAverage = salarySum / allSalary.length;
+console.log(salaryAverage);
+
+
 
 // Select a random employee
+
+let randomlyChosen = '';
+
 const getRandomEmployee = function(employeesArray) {
-  // TODO: Select and display a random employee
+  // The maximum number you can randomly choose from should be the amount of items in array
+  let max = employeesArray.length;
+  // Choosing a number from 1-(max number)
+  let randomEmployeeNum = Math.random() * (max - min) + min;
+  // Make a variable called randomlyChosen will call an employee from the array at [random number generated]
+  let randomlyChosen = employeesArray[randomEmployeeNum];
+  return randomlyChosen;
 }
+
+console.log(randomlyChosen);
 
 /*
   ====================
